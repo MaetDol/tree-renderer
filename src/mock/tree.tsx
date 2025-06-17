@@ -1,3 +1,7 @@
+import { Heading } from "../components/Heading";
+import { Level1Checkbox } from "../components/Level1Checkbox";
+import { Level1Heading } from "../components/Level1Heading";
+
 type Raw = string | number | boolean | null | undefined;
 
 export type Node = {
@@ -127,26 +131,33 @@ export const tree: Node = node(
 
 function renderHeading(_, props: Props, children?: any[]) {
   return (
-    <h1 className="text-xl mb-4" key={props.id}>
-      <button>v {props.label}</button>
-      <div className="flex flex-col">{children}</div>
-    </h1>
+    <Heading
+      key={props.id}
+      id={props.id}
+      label={props.label}
+      children={children}
+    />
   );
 }
 
-function renderLevel1Checkbox(_, props: Props) {
+function renderLevel1Checkbox(_, props: Props, children?: any[]) {
   return (
-    <span key={props.id} className="text-sm pl-4">
-      ㅁ {props.label}
-    </span>
+    <Level1Checkbox
+      key={props.id}
+      id={props.id}
+      label={props.label}
+      children={children}
+    />
   );
 }
 
 function renderLevel1Heading(_, props: Props, children?: any[]) {
   return (
-    <h2 className="text-xl pl-4" key={props.id}>
-      <button>v {props.label}</button>
-      <div className="flex flex-col">{children}</div>
-    </h2>
+    <Level1Heading
+      key={props.id}
+      id={props.id}
+      label={props.label}
+      children={children}
+    />
   );
 }
