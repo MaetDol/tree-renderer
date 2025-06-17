@@ -10,7 +10,7 @@ type FilterContextType = {
   isChecked: (id: string) => boolean;
 };
 
-const filterContext = createContext<FilterContextType>({
+export const filterContext = createContext<FilterContextType>({
   checked: new Set<string>(),
   collapsed: new Set<string>(),
 
