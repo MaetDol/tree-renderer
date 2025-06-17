@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { filterContext } from "../App";
+import { useFilterContext } from "../hooks/useFilterContext";
 
 interface Props {
   id: string;
@@ -8,17 +7,14 @@ interface Props {
 }
 
 export function Heading({ id, label, children }: Props) {
-  const { isCollapsed, setCollapsed } = useContext(filterContext);
-  const toggleCollapse = () => {
-    setCollapsed(id, !isCollapsed(id));
-  };
+  const { isCollapsed, toggleCollapsed } = useFilterContext(id);
 
   return (
     <h1 className="text-2xl mb-4" key={id}>
-      <button onClick={toggleCollapse}>
-        {isCollapsed(id) ? "v" : "^"} {label}
+      <button onClick={toggleCollapsed}>
+        {isCollapsed ? "v" : "^"} {label}
       </button>
-      {!isCollapsed(id) && <div className="flex flex-col">{children}</div>}
+      {!isCollapsed && <div className="flex flex-col">{children}</div>}
     </h1>
   );
 }
