@@ -10,7 +10,7 @@ export function Heading({ id, label, children }: Props) {
   const { isCollapsed, toggleCollapsed } = useFilterContext(id);
 
   return (
-    <h1 className="text-2xl mb-4" key={id}>
+    <h1 className="text-2xl mb-4">
       <button onClick={toggleCollapsed}>
         {isCollapsed ? "v" : "^"} {label}
       </button>
