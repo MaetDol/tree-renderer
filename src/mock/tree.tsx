@@ -1,6 +1,10 @@
 import { Heading } from "../components/Heading";
 import { Level1Checkbox } from "../components/Level1Checkbox";
 import { Level1Heading } from "../components/Level1Heading";
+import { Level2Checkbox } from "../components/Level2Checkbox";
+import { Level2Heading } from "../components/Level2Heading";
+import { Level3Checkbox } from "../components/Level3Checkbox";
+import { Level3Heading } from "../components/Level3Heading";
 
 type Raw = string | number | boolean | null | undefined;
 
@@ -73,10 +77,27 @@ export const tree: Node = node(
     ]),
 
     node("Purpose", renderHeading, [
-      node("Strengthening", renderLevel1Heading),
-      node("Stretching", renderLevel1Heading),
-      node("Range of Motion", renderLevel1Heading),
-      node("Balance", renderLevel1Heading),
+      node("Strengthening", renderLevel1Heading, [
+        node("Isometric", renderLevel2Checkbox),
+        node("Eccentric", renderLevel2Checkbox),
+        node("Concentric", renderLevel2Checkbox),
+        node("Plyometric", renderLevel2Checkbox),
+        node("Open Kinetic Chain", renderLevel2Checkbox),
+        node("Closed Kinetic Chain", renderLevel2Checkbox),
+      ]),
+      node("Stretching", renderLevel1Heading, [
+        node("Stretching - Static", renderLevel2Checkbox),
+        node("Stretching - Dynamic", renderLevel2Checkbox),
+      ]),
+      node("Range of Motion", renderLevel1Heading, [
+        node("Active", renderLevel2Checkbox),
+        node("Passive/Assisted", renderLevel2Checkbox),
+        node("Passive", renderLevel2Checkbox),
+      ]),
+      node("Balance", renderLevel1Heading, [
+        node("Balance - Static", renderLevel2Checkbox),
+        node("Balance - Dynamic", renderLevel2Checkbox),
+      ]),
       node("Neurologic", renderLevel1Checkbox),
       node("Others", renderLevel1Checkbox),
     ]),
@@ -122,9 +143,93 @@ export const tree: Node = node(
     ]),
 
     node("Muscle", renderHeading, [
-      node("Upper Quarter", renderLevel1Heading),
-      node("Lower Quarter", renderLevel1Heading),
-      node("Neck & Trunk", renderLevel1Heading),
+      node("Upper Quarter", renderLevel1Heading, [
+        node("Shoulder", renderLevel2Heading, [
+          node("Rotator Cuff", renderLevel3Heading),
+          node("Teres Major", renderLevel3Checkbox),
+          node("Rhomboid", renderLevel3Checkbox),
+          node("Deltoid", renderLevel3Checkbox),
+          node("Levator Scapulae", renderLevel3Checkbox),
+        ]),
+        node("Chest", renderLevel2Heading, [
+          node("Pectoralis", renderLevel3Checkbox),
+          node("Serratus anterior", renderLevel3Checkbox),
+        ]),
+        node("Elbow & Upper Arm", renderLevel2Heading, [
+          node("Elbow flexor", renderLevel3Checkbox),
+          node("Elbow extensor", renderLevel3Checkbox),
+        ]),
+        node("Wrist & Hand & Forearm", renderLevel2Heading, [
+          node("Wrist flexor", renderLevel3Checkbox),
+          node("Wrist extensor", renderLevel3Checkbox),
+          node("Hand - Flexor digitorum", renderLevel3Checkbox),
+          node("Hand - Extensor digitorum", renderLevel3Checkbox),
+          node("Pronator", renderLevel3Checkbox),
+          node("Supinator", renderLevel3Checkbox),
+        ]),
+      ]),
+      node("Lower Quarter", renderLevel1Heading, [
+        node("Hip", renderLevel2Heading, [
+          node("Iliopsoas", renderLevel3Checkbox),
+          node("Hip extensor", renderLevel3Checkbox),
+          node("Piriformis", renderLevel3Checkbox),
+          node("Hip adductor", renderLevel3Checkbox),
+          node("Hip abductor", renderLevel3Checkbox),
+          node("TFL", renderLevel3Checkbox),
+        ]),
+        node("Knee & Upper Leg", renderLevel2Heading, [
+          node("Quadriceps", renderLevel3Heading, [
+            node("Quadriceps", renderLevel3Checkbox),
+            node("Vastus medialis", renderLevel3Checkbox),
+          ]),
+          node("Hamstring", renderLevel3Checkbox),
+        ]),
+        node("Foot & Ankle & Lower Leg", renderLevel2Heading, [
+          node("Calf", renderLevel3Heading, [
+            node("Gastrocnemius", renderLevel3Checkbox),
+            node("Soleus", renderLevel3Checkbox),
+          ]),
+          node("Peroneal muscles", renderLevel3Checkbox),
+          node("Tibialis anterior", renderLevel3Checkbox),
+          node("Tibialis posterior", renderLevel3Checkbox),
+          node("Extensor hallucis longus", renderLevel3Checkbox),
+          node("Foot - Extensor digitorum", renderLevel3Checkbox),
+          node("Flexor hallucis longus", renderLevel3Checkbox),
+          node("Foot - Flexor digitorum", renderLevel3Checkbox),
+          node("Plantar Fascia", renderLevel3Checkbox),
+        ]),
+      ]),
+      node("Neck & Trunk", renderLevel1Heading, [
+        node("Cervical", renderLevel2Heading, [
+          node("Cervical flexor", renderLevel3Checkbox),
+          node("Cervical extensor", renderLevel3Checkbox),
+          node("Levator scapulae", renderLevel3Checkbox),
+        ]),
+        node("Thoracic", renderLevel2Heading, [
+          node("Erector spinae", renderLevel3Checkbox),
+          node("Latissimus dorsi", renderLevel3Checkbox),
+          node("Trapezius", renderLevel3Heading, [
+            node("Upper trapezius", renderLevel3Checkbox),
+            node("Mid-Low trapezius", renderLevel3Checkbox),
+          ]),
+        ]),
+        node("Lumbar & Pelvis", renderLevel2Heading, [
+          node("Quadratus lumborum", renderLevel3Checkbox),
+          node("Iliopsoas", renderLevel3Checkbox),
+          node("Pelvic floor", renderLevel3Checkbox),
+          node("Piriformis", renderLevel3Checkbox),
+          node("TFL", renderLevel3Checkbox),
+        ]),
+        node("Abdomen", renderLevel2Heading, [
+          node("Rectus abdominis", renderLevel3Checkbox),
+          node("Transverse abdominis", renderLevel3Checkbox),
+          node("Obliques", renderLevel3Checkbox),
+          node("Diaphragm", renderLevel3Checkbox),
+        ]),
+        node("Head", renderLevel2Heading, [
+          node("Face and Skull", renderLevel3Checkbox),
+        ]),
+      ]),
     ]),
   ]
 );
@@ -154,6 +259,50 @@ function renderLevel1Checkbox(_, props: Props, children?: any[]) {
 function renderLevel1Heading(_, props: Props, children?: any[]) {
   return (
     <Level1Heading
+      key={props.id}
+      id={props.id}
+      label={props.label}
+      children={children}
+    />
+  );
+}
+
+function renderLevel2Heading(_, props: Props, children?: any[]) {
+  return (
+    <Level2Heading
+      key={props.id}
+      id={props.id}
+      label={props.label}
+      children={children}
+    />
+  );
+}
+
+function renderLevel2Checkbox(_, props: Props, children?: any[]) {
+  return (
+    <Level2Checkbox
+      key={props.id}
+      id={props.id}
+      label={props.label}
+      children={children}
+    />
+  );
+}
+
+function renderLevel3Heading(_, props: Props, children?: any[]) {
+  return (
+    <Level3Heading
+      key={props.id}
+      id={props.id}
+      label={props.label}
+      children={children}
+    />
+  );
+}
+
+function renderLevel3Checkbox(_, props: Props, children?: any[]) {
+  return (
+    <Level3Checkbox
       key={props.id}
       id={props.id}
       label={props.label}

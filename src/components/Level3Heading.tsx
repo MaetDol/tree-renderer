@@ -6,15 +6,15 @@ interface Props {
   children?: React.ReactNode;
 }
 
-export function Level1Heading({ id, label, children }: Props) {
+export function Level3Heading({ id, label, children }: Props) {
   const { isCollapsed, toggleCollapsed } = useFilterContext(id);
   return (
     <h1 className="text-xl mb-4">
       <button onClick={toggleCollapsed}>
         {isCollapsed ? "v" : "^"} {label}
       </button>
-      {!isCollapsed && (
-        <div className="flex flex-col bg-[#F9F9F9]">{children}</div>
+      {isCollapsed && (
+        <div className="flex flex-col bg-[#F2F2F2]">{children}</div>
       )}
     </h1>
   );
