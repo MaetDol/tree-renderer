@@ -69,10 +69,10 @@ export const tree: Node = node(
     ]),
 
     node("Purpose", renderHeading, [
-      node("Strengthening", renderLevel1Checkbox),
-      node("Stretching", renderLevel1Checkbox),
-      node("Range of Motion", renderLevel1Checkbox),
-      node("Balance", renderLevel1Checkbox),
+      node("Strengthening", renderLevel1Heading),
+      node("Stretching", renderLevel1Heading),
+      node("Range of Motion", renderLevel1Heading),
+      node("Balance", renderLevel1Heading),
       node("Neurologic", renderLevel1Checkbox),
       node("Others", renderLevel1Checkbox),
     ]),
@@ -118,21 +118,35 @@ export const tree: Node = node(
     ]),
 
     node("Muscle", renderHeading, [
-      node("Upper Quarter", renderLevel1Checkbox),
-      node("Lower Quarter", renderLevel1Checkbox),
-      node("Neck & Trunk", renderLevel1Checkbox),
+      node("Upper Quarter", renderLevel1Heading),
+      node("Lower Quarter", renderLevel1Heading),
+      node("Neck & Trunk", renderLevel1Heading),
     ]),
   ]
 );
 
-function renderHeading(_, props: Props) {
-  return <h1 key={props.id}>{props.label}</h1>;
+function renderHeading(_, props: Props, children?: any[]) {
+  return (
+    <h1 className="text-xl mb-4" key={props.id}>
+      <button>v {props.label}</button>
+      <div className="flex flex-col">{children}</div>
+    </h1>
+  );
 }
 
 function renderLevel1Checkbox(_, props: Props) {
-  return <span key={props.id}>ㅁ {props.label}</span>;
+  return (
+    <span key={props.id} className="text-sm pl-4">
+      ㅁ {props.label}
+    </span>
+  );
 }
 
-function renderLevel1Heading(_, props: Props) {
-  return <h2 key={props.id}>{props.label}</h2>;
+function renderLevel1Heading(_, props: Props, children?: any[]) {
+  return (
+    <h2 className="text-xl pl-4" key={props.id}>
+      <button>v {props.label}</button>
+      <div className="flex flex-col">{children}</div>
+    </h2>
+  );
 }
