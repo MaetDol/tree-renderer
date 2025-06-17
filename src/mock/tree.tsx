@@ -143,7 +143,12 @@ export const tree: Node = node(
     node("Muscle", renderHeading, [
       node("Upper Quarter", renderLevel1Heading, [
         node("Shoulder", renderLevel2Heading, [
-          node("Rotator Cuff", renderLevel3Heading),
+          node("Rotator Cuff", renderLevel3Heading, [
+            node("Supraspinatus", renderCheckbox),
+            node("Infraspinatus", renderCheckbox),
+            node("Subscapularis", renderCheckbox),
+            node("Teres minor", renderCheckbox),
+          ]),
           node("Teres Major", renderCheckbox),
           node("Rhomboid", renderCheckbox),
           node("Deltoid", renderCheckbox),
@@ -232,7 +237,7 @@ export const tree: Node = node(
   ]
 );
 
-function renderHeading(_, props: Props, children?: any[]) {
+function renderHeading(depth: number, props: Props, children?: any[]) {
   return (
     <Heading
       key={props.id}
@@ -243,46 +248,50 @@ function renderHeading(_, props: Props, children?: any[]) {
   );
 }
 
-function renderCheckbox(_, props: Props, children?: any[]) {
+function renderCheckbox(depth: number, props: Props, children?: any[]) {
   return (
     <Level1Checkbox
       key={props.id}
       id={props.id}
       label={props.label}
       children={children}
+      depth={depth}
     />
   );
 }
 
-function renderLevel1Heading(_, props: Props, children?: any[]) {
+function renderLevel1Heading(depth: number, props: Props, children?: any[]) {
   return (
     <Level1Heading
       key={props.id}
       id={props.id}
       label={props.label}
       children={children}
+      depth={depth}
     />
   );
 }
 
-function renderLevel2Heading(_, props: Props, children?: any[]) {
+function renderLevel2Heading(depth: number, props: Props, children?: any[]) {
   return (
     <Level2Heading
       key={props.id}
       id={props.id}
       label={props.label}
       children={children}
+      depth={depth}
     />
   );
 }
 
-function renderLevel3Heading(_, props: Props, children?: any[]) {
+function renderLevel3Heading(depth: number, props: Props, children?: any[]) {
   return (
     <Level3Heading
       key={props.id}
       id={props.id}
       label={props.label}
       children={children}
+      depth={depth}
     />
   );
 }
